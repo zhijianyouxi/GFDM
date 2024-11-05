@@ -1,0 +1,8 @@
+{
+  "pinned": [
+    "auto-create-project:create-project-and-file",
+    "auto-create-subdir:create-subdir-and-file",
+    "obsidian--checker:check-tasks-and-create-note",
+    "auto-create-subtask:create-subtask-and-file"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "obsidian--checker",
+  "name": "Software Subtask Auto WorkFlow",
+  "version": "0.0.1",
+  "minObsVersion": "0.12.0",
+  "description": "work check and advancement",
+  "author": "gufeng_dev22",
+  "main": "main.js"
+}

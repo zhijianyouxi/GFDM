@@ -1,0 +1,9 @@
+{
+  "id": "auto-create-project",
+  "name": "Software Auto Create Project",
+  "version": "0.0.1",
+  "minObsVersion": "0.12.0",
+  "description": "Automatically create projects and related files.",
+  "author": "roger",
+  "main": "main.js"
+}
