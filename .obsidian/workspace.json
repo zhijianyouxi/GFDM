@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "obsidian使用说明.md",
+                "file": "software/software_workflow/APP/1.1.0.2/APP界面优化和相关修改/protobuf协议.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "obsidian使用说明"
+              "title": "protobuf协议"
             }
           }
         ]
@@ -164,22 +164,30 @@
   },
   "active": "4673899566bd48e4",
   "lastOpenFiles": [
-    "plugins/software/task-checker/manifest.json",
-    "plugins/software/task-checker/main.js",
-    "plugins/software/task-checker",
-    "plugins/software/auto-create-subtask/manifest.json",
-    "plugins/software/auto-create-subtask/main.js",
-    "plugins/software/auto-create-subtask",
-    "plugins/software/auto-create-subdir/manifest.json",
-    "plugins/software/auto-create-subdir/main.js",
-    "plugins/software/auto-create-subdir",
-    "plugins/software/auto-create-project/manifest.json",
-    "plugins/software/auto-create-project/main.js",
+    "software/software_workflow/APP/1.1.0.2/APP界面优化和相关修改/需求文档.md",
+    "software/software_workflow/APP/1.1.0.2/APP界面优化和相关修改/protobuf协议.md",
+    "software/software_workflow/APP/1.1.0.2/APP界面优化和相关修改/测试案例.md",
+    "software/software_workflow/APP/1.1.0.3(待启动)/物料管理/需求文档.md",
+    "software/software_workflow/APP/1.1.0.3(待启动)/物料管理/测试案例.md",
+    "software/software_workflow/APP/1.1.0.1/生产服务器设计V2.md",
+    "software/software_workflow/APP/1.1.0.1/生产服务器设计V1.md",
+    "software/software_workflow/APP/1.1.0.3(待启动)/版本说明.md",
+    "software/software_workflow/APP/1.1.0.3(待启动)/物料管理/物料系统设计.md",
+    "software/software_workflow/APP/device_info.proto",
+    "software/software_workflow/APP/1.1.0.2/版本说明.md",
+    "software/software_workflow/APP/1.1.0.1/版本说明.md",
+    "software/software_workflow/APP/项目说明.md",
+    "software/software_workflow/APP/1.1.0.3(待启动)/物料管理",
+    "software/software_workflow/APP/1.1.0.3(待启动)",
+    "software/software_workflow/APP/1.1.0.2/APP界面优化和相关修改",
+    "software/software_workflow/APP/1.1.0.2",
+    "software/software_workflow/APP/1.1.0.1/服务器接口文档V0.00.001(V1).txt",
+    "obsidian使用说明.md",
+    "software/software_workflow/APP/1.1.0.1",
+    "software/software_workflow/APP",
+    "software/software_workflow",
+    "software",
     "software/版本发布说明.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1/测试案例.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1/需求文档.md",
-    "software/software_workflow/新项目/9.0.0.1/版本说明.md",
-    "software/software_workflow/新项目/项目说明.md",
     "software/software_workflow/新项目1/项目说明.md",
     "software/software_workflow/新项目/9.0.0.1/版本任务11/测试案例.md",
     "software/software_workflow/新项目/9.0.0.1/版本任务11/需求文档.md",
@@ -191,14 +199,6 @@
     "software/software_workflow/新项目1/1.0.0.1/版本任务1/测试件打印.md",
     "software/software_workflow/新项目1/1.0.0.1/版本任务1/流程模拟测试.md",
     "software/software_workflow/新项目1/1.0.0.1/版本任务1/编码及单元测试.md",
-    "software/software_workflow/新项目1/1.0.0.1/版本任务1/详细设计.md",
-    "software/software_workflow/新项目1/1.0.0.1/版本任务1/测试案例.md",
-    "software/software_workflow/新项目1/1.0.0.1/版本任务1/需求文档.md",
-    "software/software_workflow/新项目1/1.0.0.1/版本说明.md",
-    "software/software_workflow/新项目1/1.0.0.1/版本说明.md",
-    "software/software_workflow/新项目1/1.0.0.1/版本任务1/测试件打印.md",
-    "software/software_workflow/新项目1/1.0.0.1/版本任务1/流程模拟测试.md",
-    "software/software_workflow/新项目1/1.0.0.1/版本任务1/编码及单元测试.md",
-    "software/software_workflow/新项目1/2.0.0.1/版本说明.md"
+    "software/software_workflow/新项目1/1.0.0.1/版本任务1/详细设计.md"
   ]
 }
