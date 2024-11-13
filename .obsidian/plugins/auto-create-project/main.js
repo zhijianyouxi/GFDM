@@ -17,7 +17,7 @@ module.exports = class AutoCreateProjectPlugin extends Plugin {
 
                 // 创建项目文档
                 const filePath = `${subDirPath}/${fileName}`;
-                await this.app.vault.create(filePath, '# 项目说明\n\n1.创建软件版本任务时，请先激活<<项目说明>>\n\n2.创建软件版本子任务时，请先激活<<版本说明>>\n\n3.创建软件子任务开发时，请顺序完成需求文档，测试案例，详细设计，编码及单元测试，流程模拟测试，测试件打印，测试报告，功能验收\n\n4.在任意目录可创建新软件项目');
+                await this.app.vault.create(filePath, '# 项目说明\n\n1.创建软件版本任务时，请先激活<<项目说明>>\n\n2.创建软件版本子任务时，请先激活<<版本说明>>\n\n3.创建软件子任务开发时，请顺序完成系统分析文档, 需求文档，测试案例，详细设计，编码及单元测试，流程模拟测试，测试件打印，测试报告，功能验收\n\n4.在任意目录可创建新软件项目');
 				
 				const subVersionDirName = '9.0.0.1'; // 创建版本任务路径
 				
@@ -35,58 +35,41 @@ module.exports = class AutoCreateProjectPlugin extends Plugin {
                 const subVersionTaskPath = `${subVersionPath}/${subVersionTask}`;
                 await this.app.vault.createFolder(subVersionTaskPath);
 
-				// 创建版本测试文档
-				const subTestFile = '测试案例.md'; // 创建版本测试报告
-                const testFilePath = `${subVersionTaskPath}/${subTestFile}`;
-				
-				// 创建版本需求文档
-				const subRequirementFile = '需求文档.md'; // 创建版本需求文档
-                const requirementFilePath = `${subVersionTaskPath}/${subRequirementFile}`;
-				const requirementFileContent = `# 需求文档\n\n1.需求1\n\n2.需求2\n\n测试案例详见[测试案例](./${subTestFile})`
-                await this.app.vault.create(requirementFilePath, requirementFileContent);
+                const subSystemDesignFile= '系统设计文档.md';
+                const subSystemDesignFilePath = `${subVersionTaskPath}/${subSystemDesignFile}`;
+                await this.createSystemDesignDoc(subSystemDesignFilePath);
 
-				const tableContent = `
-|案例名称|重要级别(高/中/低)|操作步骤|预期结果|测试结果|是否完成|
-| -------- | ------- |------- |------- |------- |------- |
-| 案例1  | 高 |1.打开软件|1.io口设置为1|未测试|未完成|
-`;
-
-                const processContent = `
-|案例名称|重要级别(高/中/低)|操作步骤|预期结果|测试结果|是否完成|
-| -------- | ------- |------- |------- |------- |------- |
-| 案例1  | 高 |1.打开软件|1.io口设置为1|未测试|未完成|
-`;
-
-                const deviceContent = `
-|案例名称|重要级别(高/中/低)|操作步骤|预期结果|测试结果|是否完成|
-| -------- | ------- |------- |------- |------- |------- |
-| 案例1  | 高 |1.打开软件|1.io口设置为1|未测试|未完成|
-`;
-				
-				const tableContentHead = '# 测试案例\n\n'
-				const tableContentTest1 = '# 单元测试案例\n\n'
-				const tableContentTest2 = '# 流程测试案例\n\n'
-                const tableContentTest3 = '# 测试件测试案例\n\n'
-				const tableContentTail = `\n\n需求详见[需求文档](./${subRequirementFile})`
-
-                const unitTestCheck = `
-- [ ] 单元测试任务是否完成
-`;
-
-                const processTestCheck = `
-- [ ] 流程测试任务是否完成
-`;
-
-const deviceTestCheck = `
-- [ ] 测试件任务是否完成
-`;
-                
-                // 创建测试案例
-                await this.app.vault.create(testFilePath, tableContentHead + tableContentTest1 + tableContent.trim() + '\n\n' + unitTestCheck.trim() + '\n\n'+  tableContentTest2  + processContent.trim() + '\n\n' + processTestCheck.trim() + '\n\n' + tableContentTest3 +  deviceContent.trim() + '\n\n' + deviceTestCheck.trim() + '\n\n' + tableContentTail);
-                
                 // 提示用户
                 new Notice(`项目已创建在 ${subDirPath}`);
             }
         });
+    }
+
+       
+    async createSystemDesignDoc(filePath) {
+        const contentHead = '\n'
+        const content1 = '# 需求收集\n\n'
+        const content1_1 = '功能需求\n\n 1. 需求1\n\n'
+        const content1_2 = '非功能需求\n\n 1. 需求1\n\n'
+        const content1_3 = '用户场景\n\n 1. 场景1\n\n\n\n'
+        const content2 = '# 系统用例\n\n 1. 用例1\n\n\n\n'
+        const content2_1 = '# 系统架构\n\n 1. 模块说明1\n\n'
+        const fileCheck1 = `
+- [ ] 需求收集是否完成
+`;
+        const fileCheck2 = `
+- [ ] 系统用例是否完成
+`;
+        const fileCheck3 = `
+- [ ] 系统架构是否完成
+`;
+    
+        const content = contentHead + content1 + content1_1 + content1_2 + content1_3 + 
+                       content2 + content2_1 + '\n\n\n' + 
+                       fileCheck1.trim() + '\n\n' + 
+                       fileCheck2.trim() + '\n\n' + 
+                       fileCheck3.trim();
+    
+        await this.app.vault.create(filePath, content);
     }
 };
