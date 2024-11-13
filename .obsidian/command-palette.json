@@ -3,6 +3,8 @@
     "auto-create-project:create-project-and-file",
     "auto-create-subdir:create-subdir-and-file",
     "obsidian--checker:check-tasks-and-create-note",
-    "auto-create-subtask:create-subtask-and-file"
+    "auto-create-subtask:create-subtask-and-file",
+    "Project-Manager:refresh-task-board",
+    "Project-Manager:organize-projects-and-tasks"
   ]
 }

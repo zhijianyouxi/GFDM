@@ -3,5 +3,7 @@
   "auto-create-subdir",
   "obsidian--checker",
   "auto-create-subtask",
-  "dataview"
+  "dataview",
+  "hot-reload",
+  "Project-Manager"
 ]
