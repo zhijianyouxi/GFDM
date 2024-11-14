@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "software/software_workflow/APP/1.1.0.2/版本任务1/系统设计文档.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "系统设计文档"
+              "title": "README"
             }
           }
         ]
@@ -154,28 +154,31 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "create-task-plugin:任务创建": false,
+      "project-manager:任务创建": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "command-palette:打开命令面板": false,
+      "templater-obsidian:Templater": false
     }
   },
   "active": "d03ceafa9829e5ef",
   "lastOpenFiles": [
-    "template/软件/工程模版",
-    "template/template.json.md",
-    "template/template.json",
+    "obsidian使用说明.md",
+    "README.md",
     "software/software_workflow/APP/1.1.0.2/版本任务1/系统设计文档.md",
+    "模版/软件/工程模版",
+    "template/template.json.md",
+    "模版/template.json",
     "main.js",
     "template/entry.md",
     "template/entry/未命名.md",
     "未命名",
-    "template/软件",
+    "模版/软件",
     "template/entry",
-    "template",
+    "模版",
     "software/software_workflow/APP/1.1.0.1/版本任务1/系统设计文档.md",
     "software/software_workflow/APP/1.1.0.1/版本说明.md",
     "software/software_workflow/APP/1.1.0.1/版本任务1",
@@ -198,8 +201,6 @@
     "software/software_workflow/新项目/9.0.0.1/版本任务1/编码及单元测试.md",
     "software/software_workflow/新项目/9.0.0.1/版本任务1/详细设计.md",
     "software/software_workflow/新项目/9.0.0.1/版本任务1/系统设计文档.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1/需求文档.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1",
-    "software/software_workflow/新项目/9.0.0.1/版本任务2"
+    "software/software_workflow/新项目/9.0.0.1/版本任务1"
   ]
 }
