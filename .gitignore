@@ -1,1 +1,6 @@
 test/
+
+# 忽略 .obsidian/plugins 下的所有内容
+.obsidian/plugins/*
+# 但是保留 GF-develop-manager 文件夹
+!.obsidian/plugins/GF-develop-manager/
