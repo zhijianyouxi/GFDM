@@ -1,9 +1,12 @@
 [
-  "auto-create-project",
-  "auto-create-subdir",
-  "obsidian--checker",
-  "auto-create-subtask",
   "dataview",
   "hot-reload",
-  "Project-Manager"
+  "Project-Manager",
+  "obsidian--checker",
+  "auto-create-subdir",
+  "auto-create-subtask",
+  "auto-create-project",
+  "auto-project-dashboard",
+  "create-task-plugin",
+  "templater-obsidian"
 ]

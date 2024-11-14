@@ -1,0 +1,9 @@
+{
+  "id": "create-task-plugin",
+  "name": "Create Task Plugin",
+  "version": "0.1.0",
+  "minAppVersion": "0.15.0",
+  "description": "A plugin to create tasks in Obsidian.",
+  "author": "Your Name",
+  "main": "main.js"
+}
