@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "d15de23111a01287",
+        "id": "38e16981fcd70a2e",
         "type": "tabs",
         "children": [
           {
-            "id": "d03ceafa9829e5ef",
+            "id": "cff1eedc52eaf390",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "README"
+              "title": "新标签页"
             }
           }
         ]
@@ -154,53 +150,53 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "project-manager:任务创建": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "templater-obsidian:Templater": false
+      "templater-obsidian:Templater": false,
+      "project-manager:任务创建": false
     }
   },
-  "active": "d03ceafa9829e5ef",
+  "active": "cff1eedc52eaf390",
   "lastOpenFiles": [
-    "obsidian使用说明.md",
+    "模版/软件系统设计分析模版.md",
+    "模版/软件需求文档模版.md",
+    "模版/软件工程模版.md",
+    "模版/软件版本模版.md",
+    "软件/新项目.md",
+    "/软件/新项目.md",
+    "/软件",
+    "新项目.md",
+    "/新项目.md",
+    "Untitled.md",
+    "[object Object]/Untitled 1.md",
+    "[object Object]/Untitled.md",
+    "[object Object]/Untitled 2.md",
+    "未命名",
+    "[object Object]",
     "README.md",
+    "模版/软件版本模版 copy.md",
+    "plugins/project-manager/main.js",
+    "plugins/project-manager",
+    "plugins",
+    "模版/软件/软件版本模版",
+    "模版/软件/工程模版 copy",
+    "obsidian使用说明.md",
     "software/software_workflow/APP/1.1.0.2/版本任务1/系统设计文档.md",
     "模版/软件/工程模版",
     "template/template.json.md",
     "模版/template.json",
-    "main.js",
     "template/entry.md",
     "template/entry/未命名.md",
-    "未命名",
-    "模版/软件",
-    "template/entry",
-    "模版",
     "software/software_workflow/APP/1.1.0.1/版本任务1/系统设计文档.md",
     "software/software_workflow/APP/1.1.0.1/版本说明.md",
-    "software/software_workflow/APP/1.1.0.1/版本任务1",
     "software/software_workflow/APP/1.1.0.1/系统设计文档.md",
     "software/software_workflow/APP/1.1.0.2/APP界面优化和相关修改/系统设计文档.md",
     "software/software_workflow/APP/1.1.0.2/版本说明.md",
-    "software/software_workflow/APP/1.1.0.2/版本任务1",
     "software/software_workflow/APP/1.1.0.2/APP界面优化和相关修改/测试案例.md",
-    "software/software_workflow/APP/1.1.0.2/APP界面优化和相关修改/需求文档.md",
-    "software/software_workflow/APP/1.1.0.2/APP界面优化和相关修改/需求分析文档.md",
-    "software/software_workflow/APP/项目说明.md",
-    "software/software_workflow/APP/1.1.0.2/APP界面优化和相关修改/protobuf协议.md",
-    "software/software_workflow/APP/1.1.0.2/版本任务1/需求文档.md",
-    "software/software_workflow/APP/1.1.0.2/版本任务1/测试案例.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1/功能验收.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1/测试报告.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1/测试件打印.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1/流程模拟测试.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1/测试案例.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1/编码及单元测试.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1/详细设计.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1/系统设计文档.md",
-    "software/software_workflow/新项目/9.0.0.1/版本任务1"
+    "software/software_workflow/APP/1.1.0.2/APP界面优化和相关修改/需求文档.md"
   ]
 }

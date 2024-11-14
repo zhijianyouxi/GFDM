@@ -42,20 +42,32 @@ module.exports = class CreateTaskPlugin extends Plugin {
     async handleButtonClick() {
         try {
             // 读取模板文件
-            const templateContent = await this.app.vault.adapter.read('/template/template.json');
+            const templateContent = await this.app.vault.adapter.read('/模版/template.json');
             const templates = JSON.parse(templateContent);
             
             // 显示模板选择窗口
             new TemplateSelectModal(this.app, templates, (key, value) => {
-                new Notice(`选择了模板: ${key}`);
+                new Notice(`选择了模板: ${key} ${value}`);
+                const template_file_path = `/模版/${value}`;
 
-                // 确保 Templater 插件已加载
-                if (!this.app.plugins.getPlugin("templater")) {
-                    new Notice("Templater plugin is not installed or enabled.");
-                    return;
+                const templater = this.app.plugins.plugins['templater-obsidian'];
+                const defaultFilename = `新项目.md`;
+                if (!templater) {
+                    new Notice('Templater plugin not found');
                 }
+
+                const templateFileContent = this.app.vault.adapter.read(template_file_path);
+                new Notice(`Templater plugin not found ${templateFileContent}`);
+                // 创建新文件
+                const newFile = this.app.vault.create(
+                    `/软件/${defaultFilename}`,
+                    templateFileContent
+                );
+
+                // 使用 Templater 处理新文件
+                templater.templater.overwrite_file_commands(newFile);
                 
-                console.log('Selected template:', value);
+                new Notice(`项目创建成功: ${defaultFilename}`);
             }).open();
             
         } catch (error) {
