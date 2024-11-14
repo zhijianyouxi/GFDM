@@ -6,7 +6,7 @@
 .idea
 
 # npm
-node_modules
+node_modules/
 
 # Don't include the compiled main.js file in the repo.
 # They should be uploaded to GitHub releases instead.
@@ -20,3 +20,17 @@ data.json
 
 # Exclude macOS Finder (System Explorer) View States
 .DS_Store
+
+# 忽略构建输出
+dist/
+build/
+
+# 忽略开发时的临时文件
+*.log
+
+# 明确不忽略 package.json 和其他重要配置文件
+!package.json
+!manifest.json
+!README.md
+!main.ts
+!styles.css
