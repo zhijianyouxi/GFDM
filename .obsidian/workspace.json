@@ -161,14 +161,18 @@
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
       "GF-develop-manager:Sample Plugin": false,
-      "templater-obsidian:Templater": false
+      "templater-obsidian:Templater": false,
+      "GF-develop-manager:创建新笔记": false
     }
   },
   "active": "bbdfa4763e438e63",
   "lastOpenFiles": [
     "Untitled.md",
-    "软件/项目模板/测试模板.md",
+    "工艺/项目模板/测试模板 1.md",
     "数据（由程序管理，请勿编辑）/入口.md",
+    "软件/项目模板/测试模板.md",
+    "工艺/项目模板",
+    "工艺",
     "软件/新项目.md",
     "模版/软件版本模版.md",
     "模版/软件工程模版.md",
