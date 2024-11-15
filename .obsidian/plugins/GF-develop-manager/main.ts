@@ -125,12 +125,78 @@ class TemplateSelectModal extends Modal {
     }
 }
 
+// Add this new modal class before TableContentView
+class ProjectInfoModal extends Modal {
+    result: { projectName: string; versionName: string; taskName: string } | null = null;
+    onSubmit: (result: { projectName: string; versionName: string; taskName: string } | null) => void;
+
+    constructor(app: App, onSubmit: (result: { projectName: string; versionName: string; taskName: string } | null) => void) {
+        super(app);
+        this.onSubmit = onSubmit;
+    }
+
+    async onOpen() {
+        const { contentEl } = this;
+        contentEl.empty();
+
+        contentEl.createEl('h2', { text: '项目信息' });
+
+        // Project Name
+        const projectContainer = contentEl.createDiv();
+        projectContainer.setText('项目名称: ');
+        const projectInput = projectContainer.createEl('input', { type: 'text' });
+        projectInput.style.width = '200px';
+
+        // Version Name
+        const versionContainer = contentEl.createDiv({ style: 'margin-top: 10px' });
+        versionContainer.setText('版本号: ');
+        const versionInput = versionContainer.createEl('input', { type: 'text' });
+        versionInput.style.width = '200px';
+
+        // Task Name
+        const taskContainer = contentEl.createDiv({ style: 'margin-top: 10px' });
+        taskContainer.setText('任务名称: ');
+        const taskInput = taskContainer.createEl('input', { type: 'text' });
+        taskInput.style.width = '200px';
+
+        // Add confirm button
+        const buttonContainer = contentEl.createDiv({ style: 'margin-top: 20px; text-align: right' });
+        const confirmButton = buttonContainer.createEl('button', {
+            text: '确认',
+            cls: 'mod-cta'
+        });
+
+        confirmButton.onclick = () => {
+            const projectName = projectInput.value.trim();
+            const versionName = versionInput.value.trim();
+            const taskName = taskInput.value.trim();
+
+            if (!projectName || !versionName || !taskName) {
+                new Notice('请填写完整信息');
+                return;
+            }
+
+            this.result = { projectName, versionName, taskName };
+            this.close();
+        };
+    }
+
+    onClose() {
+        const { contentEl } = this;
+        contentEl.empty();
+        this.onSubmit(this.result);
+    }
+}
+
 // Add this class definition before the GFDM class
 class TableContentView extends ItemView {
     private contentEl: HTMLElement;
 	private templateBasePath: string = '';
     private templateFileName: string = '';
 	private content: string[][];  // 添加这个属性来存储完整的内容数据
+	private projectName: string = '';
+	private versionName: string = '';
+	private taskName: string = '';
 
     getViewType(): string {
         return "table-content-view";
@@ -166,15 +232,16 @@ class TableContentView extends ItemView {
         `;
         
         // Add headers with specific widths
-        const headerWidths = ['20%', '45%', '10%', '5%', '20%']; // 总和为100%
-        ['类型', '模板', '模板变更', '生成', '进度'].forEach((header, index) => {
-            const headerCell = headerRow.createEl('div', { text: header });
-            headerCell.style.cssText = `
-                flex: 0 0 ${headerWidths[index]};
-                text-align: left;
-                padding: 5px;
-            `;
-        });
+		// Modify header widths array to accommodate new column
+		const headerWidths = ['25%', '35%', '10%', '5%', '10%', '10%']; // Added 5% for delete column
+		['类型', '模板', '变更', '生成', '进度', '删除'].forEach((header, index) => {
+			const headerCell = headerRow.createEl('div', { text: header });
+			headerCell.style.cssText = `
+				flex: 0 0 ${headerWidths[index]};
+				text-align: left;
+				padding: 5px;
+			`;
+		});
 
 		console.log('Received content:', content);
 		console.log('Content length:', content[0].length);
@@ -310,8 +377,303 @@ class TableContentView extends ItemView {
                 background-color: var(--background-secondary);
                 border-radius: 4px;
             `;
+
+			const deleteButton = rowDiv.createEl('button', { cls: 'delete-button' });
+			deleteButton.innerHTML = '×';
+			deleteButton.style.cssText = `
+				flex: 0 0 ${headerWidths[5]};
+				text-align: center;
+				padding: 5px;
+				cursor: pointer;
+				border: none;
+				background: none;
+			`;
+
+			// Add click handler for delete button
+			deleteButton.onclick = () => {
+				// Remove the row from DOM
+				rowDiv.remove();
+				if (i > 0) {
+					const prevDivider = rowDiv.previousElementSibling;
+					if (prevDivider?.tagName === 'HR') {
+						prevDivider.remove();
+					}
+				}
+				// Remove the data from content array
+				this.content[0].splice(i, 1);
+			};
         }
+
+		const addButtonContainer = container.createEl('div', { cls: 'add-button-container' });
+		addButtonContainer.style.cssText = `
+			display: flex;
+			justify-content: center;
+			margin: 30px 0;
+		`;
+		const addButton = addButtonContainer.createEl('button', { 
+			text: '+ 添加步骤',
+			cls: 'mod-cta'
+		});
+		addButton.style.cssText = `
+			padding: 8px 16px;
+			border-radius: 4px;
+		`;
+
+		addButton.onclick = async () => {
+			// Create a modal for user input
+			const modal = new Modal(this.app);
+			modal.titleEl.setText('添加新步骤');
+			
+			const modalContent = modal.contentEl;
+			
+			// Row number input
+			const rowContainer = modalContent.createDiv();
+			rowContainer.setText('在第几行后插入: ');
+			const rowInput = rowContainer.createEl('input', { type: 'number' });
+			rowInput.style.width = '60px';
+			rowInput.value = this.content[0].length.toString();
+			
+			// Step name input
+			const nameContainer = modalContent.createDiv({ style: 'margin-top: 10px' });
+			nameContainer.setText('步骤名称: ');
+			const nameInput = nameContainer.createEl('input', { type: 'text' });
+			nameInput.style.width = '200px';
+	
+			// Template selection
+			let selectedTemplate = '';
+			const templateButton = modalContent.createEl('button', {
+				text: '选择模板',
+				cls: 'mod-cta',
+				style: 'margin-top: 10px'
+			});
+	
+			templateButton.onclick = async () => {
+				try {
+					const files = await this.app.vault.getMarkdownFiles();
+					const templateFiles = files
+						.filter(file => {
+							const isInTemplateDir = file.path.startsWith(this.templateBasePath);
+							const hasTemplateInName = file.name.toLowerCase().includes('模板');
+							return isInTemplateDir && hasTemplateInName;
+						})
+						.map(file => file.path);
+	
+					new TemplateSelectModal(this.app, templateFiles, (template) => {
+						if (template) {
+							selectedTemplate = template;
+							templateButton.setText('已选择: ' + template);
+						}
+					}).open();
+				} catch (error) {
+					new Notice('获取模板文件失败: ' + error.message);
+				}
+			};
+		
+			// Add confirm button
+			const buttonContainer = modalContent.createDiv({ style: 'margin-top: 30px; text-align: right' });
+			const confirmButton = buttonContainer.createEl('button', {
+				text: '确认',
+				cls: 'mod-cta'
+			});
+
+			confirmButton.onclick = () => {
+				const rowNum = parseInt(rowInput.value);
+				const stepName = nameInput.value.trim();
+
+				if (!stepName || !selectedTemplate) {
+					new Notice('请填写完整信息');
+					return;
+				}
+
+				// Insert new row into content array
+				const newRow = [stepName, selectedTemplate, '', '', '待启动'];
+				this.content[0].splice(rowNum, 0, newRow);
+
+				// Refresh the view
+				this.setContent(this.content);
+				modal.close();
+			};
+
+        	modal.open();
+    	};
+
+		// After the add button container, add the generate all button
+		const generateAllButtonContainer = container.createEl('div', { cls: 'generate-all-button-container' });
+		generateAllButtonContainer.style.cssText = `
+			display: flex;
+			justify-content: center;
+			margin: 15px 0;
+		`;
+		
+		const generateAllButton = generateAllButtonContainer.createEl('button', { 
+			text: '一键生成所有文件',
+			cls: 'mod-cta'
+		});
+		generateAllButton.style.cssText = `
+			padding: 8px 16px;
+			border-radius: 4px;
+		`;
+
+		generateAllButton.onclick = async () => {
+			try {
+				// Get templater plugin
+				const templater = this.app.plugins.plugins['templater-obsidian'];
+				if (!templater) {
+					new Notice('Templater 插件未启用!');
+					return;
+				}
+
+				// Get project info from user
+				const projectInfo = await new Promise<{ projectName: string; versionName: string; taskName: string } | null>((resolve) => {
+					new ProjectInfoModal(this.app, (result) => {
+						resolve(result);
+					}).open();
+				});
+				
+				console.log('projectInfo:', projectInfo);
+				if (projectInfo) {
+					// Store project info in the view
+					this.projectName = projectInfo.projectName;
+					this.versionName = projectInfo.versionName;
+					this.taskName = projectInfo.taskName;
+				}
+
+				if (!projectInfo) {
+					return; // User cancelled
+				}
+	
+				const hasProjectInfo = this.projectName && this.versionName && this.taskName;
+				const basePath = hasProjectInfo 
+					? `/项目管理/software/${this.projectName}/${this.versionName}/${this.taskName}/`
+					: '';
+				const basePath1 = hasProjectInfo 
+					? `项目管理/software/${this.projectName}/${this.versionName}/${this.taskName}/`
+					: '';
+	
+				// Process each template
+				for (let i = 0; i < this.content[0].length; i++) {
+					const templatePath = this.content[0][i][1];
+					const fileName = this.content[0][i][0];
+					
+					try {
+						const templateFile = this.app.vault.getAbstractFileByPath(templatePath);
+						if (!templateFile) {
+							new Notice(`模板文件不存在: ${templatePath}`);
+							continue;
+						}
+	
+						if (hasProjectInfo) {
+							// Create the directory if it doesn't exist
+							await this.ensureDirectory(basePath);
+							const newFilePath = basePath1 + fileName + '.md';
+							// Read template content
+							const templateContent = await this.app.vault.read(templateFile);
+							
+							// Disable auto-scripts in template
+							const modifiedContent = this.disableAutoScripts(templateContent, this.projectName, this.versionName, this.taskName);
+							await this.app.vault.create(newFilePath, modifiedContent);
+
+							const templateFile1 = this.app.vault.getAbstractFileByPath(newFilePath);
+							if (!templateFile1) {
+								new Notice(`模板文件不存在: ${newFilePath}`);
+								continue;
+							}
+							await templater.templater.create_new_note_from_template(templateFile1);
+							
+							// Add delay to ensure file operations are complete
+							await new Promise(resolve => setTimeout(resolve, 100));
+							try {
+								const fileToDelete = this.app.vault.getAbstractFileByPath(newFilePath);
+								if (fileToDelete) {
+									await this.app.vault.delete(fileToDelete);
+								}
+							} catch (deleteError) {
+								console.warn(`Failed to delete temporary file ${newFilePath}:`, deleteError);
+								// Continue execution even if delete fails
+							}
+
+							const files = this.app.vault.getFiles();
+							const untitledFiles = files.filter(file => file.name === 'Untitled.md')
+								.sort((a, b) => b.stat.ctime - a.stat.ctime);
+							
+							const untitledFile = untitledFiles[0]; // 获取最新创建的文件
+							if (!untitledFile) {
+								new Notice('Could not find Untitled.md file');
+								return;
+							}
+							if (untitledFile) {
+								await this.app.vault.rename(untitledFile, newFilePath);
+							} else {
+								new Notice('Could not find Untitled.md file to rename');
+							}
+						} else {
+							// Use regular template creation with scripts enabled
+							await templater.templater.create_new_note_from_template(templateFile);
+						}
+					} catch (error) {
+						console.error(`处理模板失败 ${fileName}:`, error);
+						new Notice(`处理模板失败 ${fileName}: ${error.message}`);
+					}
+				}
+				
+				new Notice('所有文件生成完成');
+			} catch (error) {
+				console.error('批量生成失败:', error);
+				new Notice(`批量生成失败: ${error.message}`);
+			}
+		};
+
     }
+
+	async ensureDirectory(path: string): Promise<void> {
+		const dirs = path.split('/').filter(p => p);
+		let currentPath = '';
+		
+		for (const dir of dirs) {
+			currentPath += '/' + dir;
+			const exists = await this.app.vault.adapter.exists(currentPath);
+			if (!exists) {
+				await this.app.vault.createFolder(currentPath);
+			}
+		}
+	}
+
+	disableAutoScripts(content: string, project: string, version: string, task: string): string {
+		// 查找默认负责人
+		const lines = content.split('\n');
+		let defaultOwner = '';
+		
+		for (const line of lines) {
+			if (line.includes('默认负责人:')) {
+				defaultOwner = line.split('默认负责人:')[1].trim();
+				break;
+			}
+		}
+		
+		let tail = "";
+		let isTail = false;
+		for (const line of lines) {
+			if (isTail) {
+				tail += line + '\n';     
+			} else {
+				if (line.includes('-%>')) {
+					tail += line + '\n';
+					isTail = true;
+				}
+			}
+		}
+
+		// 使用模板字符串替代字符串拼接
+		const head = `---
+<%*
+let title = "${project}";
+let version = "${version}";
+let taskName = "${task}";
+let owner = "${defaultOwner}";
+`;
+
+		return head + tail;
+	}
 
 	async setContentEntry(entryName: string, templatePath_param: string): Promise<void> {
         this.contentEl.empty();
@@ -485,7 +847,7 @@ export default class GFDM extends Plugin {
 		try {
 			const entryFile = this.app.vault.getAbstractFileByPath('数据（由程序管理，请勿编辑）/入口.md');
 			if (!entryFile) {
-				throw new Error('入口文件不存在');
+				throw new Error('入口文件不��在');
 			}
 
 			const content = await this.app.vault.read(entryFile);
@@ -755,7 +1117,7 @@ export default class GFDM extends Plugin {
 					// 	return;
 					// }
 
-					// // 使用 templater 的内部 API 创建笔记
+					// // 使用 templater 的内部 API 创��笔记
 					// await templater.templater.create_new_note_from_template(templateFile);
 				} catch (error) {
 					console.error('创建笔记失败:', error);
@@ -790,7 +1152,7 @@ export default class GFDM extends Plugin {
 						return;
 					}
 
-					// 使用 templater 的内部 API 创建笔记
+					// 用 templater 的内部 API 创建笔记
 					await templater.templater.create_new_note_from_template(templateFile);
 				} catch (error) {
 					console.error('创建笔记失败:', error);
