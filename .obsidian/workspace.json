@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "未命名.md",
+                "file": "软件/项目模板/入口工程模板.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "未命名"
+              "title": "入口工程模板"
             }
           }
         ]
@@ -160,7 +160,7 @@
             }
           },
           {
-            "id": "960e353b88696d38",
+            "id": "5c3451a45fb69e57",
             "type": "leaf",
             "state": {
               "type": "table-content-view",
@@ -174,7 +174,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 624.5
+    "width": 547.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -188,18 +188,19 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "82f89af3c725a4ab",
+  "active": "5c3451a45fb69e57",
   "lastOpenFiles": [
+    "Untitled.md",
+    "软件/项目模板/入口版本子任务模板.md",
+    "软件/项目模板/入口工程模板.md",
+    "未命名.md",
     "项目管理/software/test/项目说明.md.md",
     "项目管理/software/APP/项目说明.md.md",
     "项目管理/software/2222/项目说明.md.md",
     "数据（由程序管理，请勿编辑）/入口.md",
-    "未命名.md",
     "软件/项目模板/入口工程模板2.md",
     "软件/项目模板/入口工程模板1.md",
     "项目管理/software/2222",
-    "软件/项目模板/入口版本子任务模板.md",
-    "软件/项目模板/入口工程模板.md",
     "软件/项目模板/验收模板.md",
     "软件/项目模板/需求模板.md",
     "软件/项目模板/系统设计模板.md",

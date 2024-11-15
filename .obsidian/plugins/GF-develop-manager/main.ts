@@ -147,20 +147,33 @@ class TableContentView extends ItemView {
 
     async setContent(content: string[][]): Promise<void> {
         this.contentEl.empty();
-		this.content = content;
+        this.content = content;
 
-        // Create header row
-        const headerRow = this.contentEl.createEl('div', { cls: 'table-header-row' });
-        headerRow.style.display = 'flex';
-        headerRow.style.alignItems = 'center';
-        headerRow.style.gap = '10px';
-        headerRow.style.margin = '5px 0';
-        headerRow.style.fontWeight = 'bold';
+        // 添加固定宽度的容器
+        const container = this.contentEl.createEl('div', { cls: 'table-container' });
+        container.style.width = '100%';
+        container.style.maxWidth = '800px'; // 设置最大宽度
         
-        // Add headers
-        ['类型', '模板', '模板变更', '生成', '进度'].forEach(header => {
+        // Create header row
+        const headerRow = container.createEl('div', { cls: 'table-header-row' });
+        headerRow.style.cssText = `
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 5px 0;
+            font-weight: bold;
+            width: 100%;
+        `;
+        
+        // Add headers with specific widths
+        const headerWidths = ['20%', '45%', '10%', '5%', '20%']; // 总和为100%
+        ['类型', '模板', '模板变更', '生成', '进度'].forEach((header, index) => {
             const headerCell = headerRow.createEl('div', { text: header });
-            headerCell.style.flex = '1';
+            headerCell.style.cssText = `
+                flex: 0 0 ${headerWidths[index]};
+                text-align: left;
+                padding: 5px;
+            `;
         });
 
 		console.log('Received content:', content);
@@ -175,7 +188,7 @@ class TableContentView extends ItemView {
             this.templateFileName = templatePath.substring(lastSlashIndex + 1);
             
             if (i > 0) {
-                const divider = this.contentEl.createEl('hr', { cls: 'row-divider' });
+                const divider = container.createEl('hr', { cls: 'row-divider' });
                 divider.style.cssText = `
                     margin: 8px 0;
                     border: none;
@@ -184,28 +197,45 @@ class TableContentView extends ItemView {
                 `;
             }
             
-            const rowDiv = this.contentEl.createEl('div', { cls: 'table-row' });
+            const rowDiv = container.createEl('div', { cls: 'table-row' });
             rowDiv.style.cssText = `
                 display: flex;
                 align-items: center;
                 gap: 10px;
                 margin: 5px 0;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                width: 100%;
             `;
 
-            // Update cell content to use actual data from content array
+            // Type cell
             const typeCell = rowDiv.createEl('div', { text: content[0][i][0] || "", cls: 'type-cell' });
-            typeCell.style.flex = '1';
+            typeCell.style.cssText = `
+                flex: 0 0 ${headerWidths[0]};
+                text-align: left;
+                padding: 5px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            `;
 
+            // Template cell
             const templateCell = rowDiv.createEl('div', { text: this.templateFileName || "", cls: 'template-cell' });
-            templateCell.style.flex = '1';
+            templateCell.style.cssText = `
+                flex: 0 0 ${headerWidths[1]};
+                text-align: left;
+                padding: 5px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            `;
 
-            // Add change button
+            // Change button
             const changeButton = rowDiv.createEl('button', { cls: 'change-button' });
             changeButton.innerHTML = '...';
-            changeButton.style.flex = '1';
+            changeButton.style.cssText = `
+                flex: 0 0 ${headerWidths[2]};
+                text-align: left;
+                padding: 5px;
+            `;
             
             // Add click handler for change button
             changeButton.onclick = async () => {
@@ -234,10 +264,14 @@ class TableContentView extends ItemView {
                 }
             };
 
-            // Add generate button
+            // Generate button
             const generateButton = rowDiv.createEl('button', { cls: 'generate-button' });
             generateButton.innerHTML = '✓';
-            generateButton.style.flex = '1';
+            generateButton.style.cssText = `
+                flex: 0 0 ${headerWidths[3]};
+                text-align: left;
+                padding: 5px;
+            `;
             
             // Add click handler for generate button
             generateButton.onclick = async () => {
@@ -266,12 +300,15 @@ class TableContentView extends ItemView {
                 }
             };
 
-            // Add progress text
+            // Progress text
             const progressText = rowDiv.createEl('div', { text: '进行中', cls: 'progress-text' });
-            progressText.style.flex = '1';
-            progressText.style.backgroundColor = 'var(--background-secondary)';
-            progressText.style.padding = '4px';
-            progressText.style.borderRadius = '4px';
+            progressText.style.cssText = `
+                flex: 0 0 ${headerWidths[4]};
+                text-align: left;
+                padding: 1px;
+                background-color: var(--background-secondary);
+                border-radius: 4px;
+            `;
         }
     }
 
@@ -280,28 +317,32 @@ class TableContentView extends ItemView {
         this.content = "";  // Convert to the expected format
 
         // Create header row
-        const headerRow = this.contentEl.createEl('div', { cls: 'table-header-row' });
-        headerRow.style.display = 'flex';
-        headerRow.style.alignItems = 'center';
-        headerRow.style.gap = '10px';
-        headerRow.style.margin = '5px 0';
-        headerRow.style.fontWeight = 'bold';
-
-
-        
-        // Add headers
-        ['类型', '模板', '模板变更', '生成', '进度'].forEach(header => {
-            const headerCell = headerRow.createEl('div', { text: header });
-            headerCell.style.flex = '1';
-        });
-
-		const divider = this.contentEl.createEl('hr', { cls: 'row-divider' });
-		divider.style.cssText = `
-			margin: 8px 0;
-			border: none;
-			height: 1px;
-			background-color: var(--background-modifier-border);
+       // 添加固定宽度的容器
+		const container = this.contentEl.createEl('div', { cls: 'table-container' });
+		container.style.width = '100%';
+		container.style.maxWidth = '800px'; // 设置最大宽度
+		
+		// Create header row with specific widths
+		const headerRow = container.createEl('div', { cls: 'table-header-row' });
+		headerRow.style.cssText = `
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin: 5px 0;
+			font-weight: bold;
+			width: 100%;
 		`;
+		
+		// Add headers with specific widths
+		const headerWidths = ['20%', '45%', '10%', '5%', '20%']; // 总和为100%
+		['类型', '模板', '模板变更', '生成', '进度'].forEach((header, index) => {
+			const headerCell = headerRow.createEl('div', { text: header });
+			headerCell.style.cssText = `
+				flex: 0 0 ${headerWidths[index]};
+				text-align: left;
+				padding: 5px;
+			`;
+		});
 
         // Create content rows
         
@@ -314,28 +355,46 @@ class TableContentView extends ItemView {
 		console.log('templateBasePath:', this.templateBasePath);
 		console.log('templateFileName:', this.templateFileName);
 		
-		const rowDiv = this.contentEl.createEl('div', { cls: 'table-row' });
+		// 更新行样式
+		const rowDiv = container.createEl('div', { cls: 'table-row' });
 		rowDiv.style.cssText = `
 			display: flex;
 			align-items: center;
 			gap: 10px;
 			margin: 5px 0;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
+			width: 100%;
 		`;
 
 		// Update cell content to use actual data from content array
+		 // 类型单元格
 		const typeCell = rowDiv.createEl('div', { text: entryName || "", cls: 'type-cell' });
-		typeCell.style.flex = '1';
+		typeCell.style.cssText = `
+			flex: 0 0 ${headerWidths[0]};
+			text-align: left;
+			padding: 5px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		`;
 
 		const templateCell = rowDiv.createEl('div', { text: this.templateFileName || "", cls: 'template-cell' });
-		templateCell.style.flex = '1';
+		templateCell.style.cssText = `
+			flex: 0 0 ${headerWidths[1]};
+			text-align: left;
+			padding: 5px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		`;
 
 		// Add change button
 		const changeButton = rowDiv.createEl('button', { cls: 'change-button' });
 		changeButton.innerHTML = '...';
-		changeButton.style.flex = '1';
+		changeButton.style.cssText = `
+			flex: 0 0 ${headerWidths[2]};
+			text-align: left;
+			padding: 5px;
+		`;
 		
 		// Add click handler for change button
 		changeButton.onclick = async () => {
@@ -367,7 +426,11 @@ class TableContentView extends ItemView {
 		// Add generate button
 		const generateButton = rowDiv.createEl('button', { cls: 'generate-button' });
 		generateButton.innerHTML = '✓';
-		generateButton.style.flex = '1';
+		generateButton.style.cssText = `
+			flex: 0 0 ${headerWidths[3]};
+			text-align: left;
+			padding: 5px;
+		`;
 		
 		// Add click handler for generate button
 		generateButton.onclick = async () => {
@@ -398,10 +461,13 @@ class TableContentView extends ItemView {
 
 		// Add progress text
 		const progressText = rowDiv.createEl('div', { text: '进行中', cls: 'progress-text' });
-		progressText.style.flex = '1';
-		progressText.style.backgroundColor = 'var(--background-secondary)';
-		progressText.style.padding = '4px';
-		progressText.style.borderRadius = '4px';
+		progressText.style.cssText = `
+			flex: 0 0 ${headerWidths[4]};
+			text-align: left;
+			padding: 4px;
+			background-color: var(--background-secondary);
+			border-radius: 4px;
+		`;
 	}
 }
 
