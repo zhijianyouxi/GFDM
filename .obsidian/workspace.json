@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "软件/项目模板/入口工程模板.md",
+                "file": "软件/项目模板/入口版本子任务模板.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "入口工程模板"
+              "title": "入口版本子任务模板"
             }
           }
         ]
@@ -151,30 +151,20 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "软件/项目模板/入口工程模板.md",
+                "file": "软件/项目模板/入口项目模板.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "入口工程模板"
-            }
-          },
-          {
-            "id": "5c3451a45fb69e57",
-            "type": "leaf",
-            "state": {
-              "type": "table-content-view",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "Table Content"
+              "title": "入口项目模板"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 547.5
+    "width": 567.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -188,42 +178,42 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "5c3451a45fb69e57",
+  "active": "dc84e650a88f99da",
   "lastOpenFiles": [
-    "Untitled.md",
     "软件/项目模板/入口版本子任务模板.md",
-    "软件/项目模板/入口工程模板.md",
-    "未命名.md",
-    "项目管理/software/test/项目说明.md.md",
-    "项目管理/software/APP/项目说明.md.md",
-    "项目管理/software/2222/项目说明.md.md",
+    "软件/项目模板/入口版本任务模板.md",
     "数据（由程序管理，请勿编辑）/入口.md",
-    "软件/项目模板/入口工程模板2.md",
-    "软件/项目模板/入口工程模板1.md",
-    "项目管理/software/2222",
+    "软件/项目模板/入口项目模板.md",
+    "软件/项目模板/单元测试模板.md",
+    "软件/项目模板/集成测试模板.md",
+    "软件/项目模板/测试件和上机打印测试模板.md",
+    "软件/项目模板/测试报告模板.md",
+    "软件/项目模板/测试案例模板.md",
+    "项目管理/software/test/项目说明.md.md",
+    "项目管理/software/test",
+    "项目管理/software/APP/项目说明.md.md",
+    "项目管理/software/APP",
     "软件/项目模板/验收模板.md",
+    "软件/项目模板/测试报告模板 copy.md",
+    "软件/项目模板/测试报告.md",
+    "软件/项目模板/测试件和上机打印测试模板 copy.md",
+    "软件/项目模板/测试案例模板 copy 3.md",
+    "软件/项目模板/编码模板.md",
+    "软件/项目模板/测试案例模板 copy 4.md",
+    "软件/项目模板/测试案例模板 copy 2.md",
+    "软件/项目模板/测试案例模板 copy.md",
+    "软件/项目模板/详细设计模板.md",
+    "软件/项目模板/系统设计模板 copy.md",
+    "软件/项目模板/需求模板 copy.md",
     "软件/项目模板/需求模板.md",
     "软件/项目模板/系统设计模板.md",
-    "软件/项目模板/入口版本任务模板.md",
-    "软件/项目模板/任务模板.md",
-    "软件/项目模板/测试模板12.md",
-    "软件/项目模板/测试模板11.md",
-    "软件/项目模板/测试模板 1.md",
-    "项目管理/任务/null/11.md",
+    "软件/项目模板/版本任务模板.md",
+    "项目管理/software/2222",
     "项目管理/任务/null",
     "项目管理/任务",
-    "项目管理/software/test",
-    "项目管理/software/APP",
-    "软件/项目模板/版本任务模板.md",
-    "软件/项目模板/编码设计与单元测试模板.md",
-    "项目管理/software/PHONE/项目说明.md.md",
     "项目管理/software/PHONE",
-    "软件/项目模板/测试模板.md",
-    "项目管理/software/111/项目说明.md.md",
     "项目管理/software/111",
-    "项目管理/software/12/项目说明.md.md",
     "项目管理/software/12",
-    "项目管理/software/操作软件/项目说明.md.md",
     "项目管理/software/操作软件",
     "项目管理/software/device"
   ]

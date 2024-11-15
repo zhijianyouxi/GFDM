@@ -182,6 +182,7 @@ class TableContentView extends ItemView {
         // Create content rows
         for (let i = 0; i < content[0].length; i++) {
             console.log('Processing row:', i, content[0][i]);
+			this.content[0][i][1] = content[0][i][1]
 			const templatePath = content[0][i][1] || "";
             const lastSlashIndex = templatePath.lastIndexOf('/');
             this.templateBasePath = templatePath.substring(0, lastSlashIndex + 1);
@@ -301,7 +302,7 @@ class TableContentView extends ItemView {
             };
 
             // Progress text
-            const progressText = rowDiv.createEl('div', { text: '进行中', cls: 'progress-text' });
+            const progressText = rowDiv.createEl('div', { text: '待启动', cls: 'progress-text' });
             progressText.style.cssText = `
                 flex: 0 0 ${headerWidths[4]};
                 text-align: left;
@@ -315,6 +316,7 @@ class TableContentView extends ItemView {
 	async setContentEntry(entryName: string, templatePath_param: string): Promise<void> {
         this.contentEl.empty();
         this.content = "";  // Convert to the expected format
+		
 
         // Create header row
        // 添加固定宽度的容器
@@ -350,6 +352,9 @@ class TableContentView extends ItemView {
 		const lastSlashIndex = templatePath.lastIndexOf('/');
 		this.templateBasePath = templatePath.substring(0, lastSlashIndex + 1);
 		this.templateFileName = templatePath.substring(lastSlashIndex + 1);
+
+		this.content = templatePath_param
+		console.log('Received content:', this.content);
 
 		console.log('entryName:', entryName);
 		console.log('templateBasePath:', this.templateBasePath);
