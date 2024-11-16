@@ -543,12 +543,25 @@ class TableContentView extends ItemView {
 				}
 	
 				const hasProjectInfo = this.projectName && this.versionName && this.taskName;
-				const basePath = hasProjectInfo 
-					? `/项目管理/software/${this.projectName}/${this.versionName}/${this.taskName}/`
-					: '';
-				const basePath1 = hasProjectInfo 
-					? `项目管理/software/${this.projectName}/${this.versionName}/${this.taskName}/`
-					: '';
+				let basePath = ""
+				let basePath1 = ""
+				if (this.templateBasePath.includes('软件')) {
+					basePath = hasProjectInfo 
+						? `项目管理/software/${this.projectName}/${this.versionName}/${this.taskName}/`
+						: '';
+					basePath1 = hasProjectInfo 
+						? `项目管理/software/${this.projectName}/${this.versionName}/${this.taskName}/`
+						: '';
+				}
+
+				if (this.templateBasePath.includes('工艺')) {
+					basePath = hasProjectInfo 
+						? `项目管理/technology/${this.projectName}/${this.versionName}/${this.taskName}/`
+						: '';
+					basePath1 = hasProjectInfo 
+						? `项目管理/technology/${this.projectName}/${this.versionName}/${this.taskName}/`
+						: '';
+				}
 	
 				// Process each template
 				for (let i = 0; i < this.content[0].length; i++) {
